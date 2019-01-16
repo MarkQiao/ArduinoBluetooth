@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="backdrop" type="id" />
+    <item name="collapsing_toolbar" type="id" />
+    <item name="appbar" type="id" />
+    <item name="availableDevicesRecyclerView" type="id" />
+    <item name="devicesScanProgress" type="id" />
+    <item name="availableDevicesTextView" type="id" />
+    <item name="availableDevicesHeader" type="id" />
+    <item name="pairedSeparator" type="id" />
+    <item name="pairedDevicesRecyclerView" type="id" />
+    <item name="pairedDevicesTextView" type="id" />
+    <item name="mainScrollview" type="id" />
+    <item name="bt_scan_fab" type="id" />
+</resources>
