@@ -100,7 +100,7 @@ public class ScrollingActivity extends AppCompatActivity {
         mItemSelectDailogAdapters = new LoanDaquanAdapter(DeviceList, this);
         this.s.setAdapter(mItemSelectDailogAdapters);
         t();
-        startDiscovery();
+
     }
 
 
@@ -109,13 +109,12 @@ public class ScrollingActivity extends AppCompatActivity {
      */
     private void startDiscovery() {
         // 设置广播信息过滤
-        IntentFilter intentFilter = new IntentFilter();
-        intentFilter.addAction(BluetoothDevice.ACTION_FOUND);
-        intentFilter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
-   /*     intentFilter.addAction(BluetoothAdapter.ACTION_SCAN_MODE_CHANGED);
-        intentFilter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);*/
+        IntentFilter localIntentFilter = new IntentFilter(BluetoothDevice.ACTION_FOUND);
+        localIntentFilter.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
+        localIntentFilter.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
+
 // 注册广播接收器，接收并处理搜索结果
-        registerReceiver(receiver, intentFilter);
+        registerReceiver(receiver, localIntentFilter);
 // 寻找蓝牙设备，android会将查找到的设备以广播形式发出去
         startScanBluth();
     }
@@ -148,9 +147,18 @@ public class ScrollingActivity extends AppCompatActivity {
                     Log.d("------->", "-->" + device.getName() + ", " + device.getAddress());
                     mItemSelectDailogAdapters.setData(mAvailableDeviceList);
                 }
-            }else if(BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)){
-//                hideProgressBar();
             }
+            if(BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action)){
+                showProgressBar();
+            }
+            if(BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)){
+                hideProgressBar();
+            }
+          /*  do
+            {
+            } while (!BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action));*/
+
+
         }
     };
 
@@ -218,10 +226,10 @@ public class ScrollingActivity extends AppCompatActivity {
     }
 
     protected void onResume() {
+        startDiscovery();
         this.fab.startAnimation(this.fabOpen);
         if (this.mBluetoothAdapter != null) {
             if (!this.mBluetoothAdapter.isEnabled()) {
-                hideProgressBar();
             }
         } else {
             return;
