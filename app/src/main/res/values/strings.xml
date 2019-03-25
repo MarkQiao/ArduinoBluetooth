@@ -98,4 +98,9 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="paired_devices">连接设备</string>
     <string name="available_devices">可用设备</string>
+    <string name="appVersionTitle">Build version</string>
+    <string name="share">Share</string>
+    <string name="rateUs">Rate this app</string>
+    <string name="action_about">About</string>
+    <string name="action_scan">Scan</string>
 </resources>

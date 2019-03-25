@@ -26,7 +26,8 @@
                 android:layout_height="150dp"
                 android:layout_margin="48.0dip"
                 android:src="@drawable/slide03"
-                app:layout_collapseMode="parallax" />
+                app:layout_collapseMode="parallax"
+                android:contentDescription="TODO" />
 
             <android.support.v7.widget.Toolbar
                 android:id="@id/toolbar"
@@ -58,7 +59,7 @@
                 android:text="@string/paired_devices"
                 android:textColor="@color/colorPrimary"
                 android:textSize="24.0sp"
-                android:visibility="gone" />
+                />
 
             <android.support.v7.widget.RecyclerView
                 android:id="@id/pairedDevicesRecyclerView"
@@ -66,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/pairedDevicesTextView"
                 android:layout_marginTop="16.0dip"
-                android:visibility="gone" />
+                />
 
             <View
                 android:id="@id/pairedSeparator"
@@ -75,7 +76,7 @@
                 android:layout_below="@id/pairedDevicesRecyclerView"
                 android:layout_marginTop="48.0dip"
                 android:background="#ffdcdcdc"
-                android:visibility="gone" />
+                 />
 
             <RelativeLayout
                 android:id="@id/availableDevicesHeader"
@@ -101,8 +102,9 @@
                     android:layout_height="24.0dip"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="12.0dip"
+                    android:visibility="gone"
                     android:layout_toRightOf="@id/availableDevicesTextView"
-                    android:visibility="gone" />
+                     />
             </RelativeLayout>
 
             <android.support.v7.widget.RecyclerView

@@ -2,8 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:id="@+id/bluetooth_scan"
+        android:title="@string/action_scan"
+        android:visible="false"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/about"
+        android:icon="@drawable/ic_more_vert_white_24dp"
+        android:title="@string/action_about"
+        app:showAsAction="always" />
 </menu>
