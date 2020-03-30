@@ -6,9 +6,12 @@ import android.os.Handler;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mark.arduinobluetooth.APP;
 import com.mark.arduinobluetooth.R;
@@ -39,6 +42,12 @@ public class SendInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_send_info);
 
         setTitle(getIntent().getStringExtra("DeviceName"));
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
+
         EventBus.getDefault().register(this);
         showtv = findViewById(R.id.tv_show);
         et_send = findViewById(R.id.et_send);
@@ -61,6 +70,37 @@ public class SendInfoActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    /**
+     * 复写：添加菜单布局
+     * */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    /**
+     * 复写：设置菜单监听
+     * */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            //actionbar navigation up 按钮
+            case android.R.id.home:
+                finish();
+                break;
+            case R.id.action_add:
+                Toast.makeText(this, "Add selected", Toast.LENGTH_SHORT).show();
+                break;
+            default:
+                break;
+        }
+        return true;
+    }
+
+
 
 
     private void init() {

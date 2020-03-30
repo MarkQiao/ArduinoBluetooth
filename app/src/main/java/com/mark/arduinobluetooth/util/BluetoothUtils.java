@@ -13,6 +13,7 @@ import android.os.Build;
 import android.util.Log;
 
 import com.mark.arduinobluetooth.APP;
+import com.mark.arduinobluetooth.ui.ProgressActivity;
 import com.mark.arduinobluetooth.ui.SendInfoActivity;
 
 import java.io.IOException;
@@ -164,7 +165,7 @@ public class BluetoothUtils {
     /***
      * 蓝牙连接代码,项目中连接会使用封装的工具类，在这里提取重写
      */
-    public void connect(Context mcontext, BluetoothDevice bluetoothDevice, ProgressDialog dialog) {
+    public void connect(Context mcontext, int type, BluetoothDevice bluetoothDevice, ProgressDialog dialog) {
         try {
             mBluetoothSocket = bluetoothDevice.createRfcommSocketToServiceRecord(mactekHartModemUuid);
             if (mBluetoothSocket != null) {
@@ -176,8 +177,25 @@ public class BluetoothUtils {
                     mBluetoothSocket.connect();
                 }
                 dialog.dismiss();
+                Intent intent = null;
+                switch (type) {
+                    case 0:
+                        intent = new Intent(mcontext, ProgressActivity.class);
+                        break;
+                    case 1:
+                        intent = new Intent(mcontext, ProgressActivity.class);
+                        break;
+                    case 2:
+                        intent = new Intent(mcontext, ProgressActivity.class);
+                        break;
+                    case 3:
+                        intent = new Intent(mcontext, SendInfoActivity.class);
+                        break;
+                    default:
+                        break;
+                }
                 //        EventBus.getDefault().post(new BluRxBean(connectsuccess, bluetoothDevice)); //链接成功
-                Intent intent = new Intent(mcontext, SendInfoActivity.class);
+                //                Intent intent = new Intent(mcontext, SendInfoActivity.class);
                 intent.putExtra("DeviceName", bluetoothDevice.getName());
                 mcontext.startActivity(intent);
             }

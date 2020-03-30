@@ -31,6 +31,7 @@ import android.widget.Toast;
 import com.mark.arduinobluetooth.R;
 import com.mark.arduinobluetooth.adapter.LoanDaquanAdapter;
 import com.mark.arduinobluetooth.dialog.CommonDialog;
+import com.mark.arduinobluetooth.dialog.TypeDialog;
 import com.mark.arduinobluetooth.dialog.showBottomDialog;
 import com.mark.arduinobluetooth.util.BluetoothUtils;
 import com.mark.arduinobluetooth.util.factory.ThreadPoolProxyFactory;
@@ -82,15 +83,14 @@ public class ScrollingActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         collapsingToolbarLayout.setExpandedTitleColor(Color.TRANSPARENT);
         collapsingToolbarLayout.setCollapsedTitleTextColor(Color.WHITE);
-        fab = (FloatingActionButton) findViewById(R.id.bt_scan_fab);
-        mProgressBar = ((ProgressBar) findViewById(R.id.devicesScanProgress));
+        fab = findViewById(R.id.bt_scan_fab);
+        mProgressBar = findViewById(R.id.devicesScanProgress);
         fabOpen = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
         fabOnClick = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_backward);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 BluetoothUtils.getInstance().startScanBluth();
-                //        SendSocketService.sendMessage("111111");
                 fab.startAnimation(fabOnClick);
             }
         });
@@ -129,20 +129,27 @@ public class ScrollingActivity extends AppCompatActivity {
         mItemSelectDailogAdapter.setOnItemClickListener(new LoanDaquanAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(final BluetoothDevice devices) {
-                showProgressDialog("正在连接......");
+
 
                 /**
                  * 开启蓝牙服务端
                  */
-                ThreadPoolProxyFactory.getNormalThreadPoolProxy().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        BluetoothUtils.getInstance().connect(ScrollingActivity.this, devices, dialogs);
 
+                final TypeDialog dialog = new TypeDialog(ScrollingActivity.this);
+                dialog.setOnClickBottomListener(new TypeDialog.OnClickBottomListener() {
+                    @Override
+                    public void onNegtiveClick(final int type) {
+                        showProgressDialog("正在连接......");
+                        dialog.dismiss();
+                        ThreadPoolProxyFactory.getNormalThreadPoolProxy().execute(new Runnable() {
+                            @Override
+                            public void run() {
+                                BluetoothUtils.getInstance().connect(ScrollingActivity.this, type,devices, dialogs);
+                            }
+                        });
                     }
                 });
-                //        TypeDialog dialog = new TypeDialog(ScrollingActivity.this);
-                //        dialog.show();
+                dialog.show();
             }
 
             @Override
@@ -185,7 +192,7 @@ public class ScrollingActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-           Log.d("------------>",action);
+            Log.d("------------>", action);
             BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
             if (BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action)) {
                 showProgressBar();
