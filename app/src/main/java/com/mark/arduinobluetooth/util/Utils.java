@@ -1,4 +1,4 @@
-package com.mark.arduinobluetooth;
+package com.mark.arduinobluetooth.util;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;

@@ -1,4 +1,4 @@
-package com.mark.arduinobluetooth;
+package com.mark.arduinobluetooth.ui;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -13,8 +13,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.mark.arduinobluetooth.R;
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

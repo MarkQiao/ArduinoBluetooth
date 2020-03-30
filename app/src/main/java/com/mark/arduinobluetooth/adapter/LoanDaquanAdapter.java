@@ -1,4 +1,4 @@
-package com.mark.arduinobluetooth;
+package com.mark.arduinobluetooth.adapter;
 
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.mark.arduinobluetooth.R;
 
 import java.util.List;
 
@@ -44,7 +46,7 @@ public class LoanDaquanAdapter extends RecyclerView.Adapter<LoanDaquanAdapter.Vi
 
     @Override
     public void onBindViewHolder(LoanDaquanAdapter.ViewHolder holder, final int position) {
-        BluetoothDevice mItemTypeBean = mList.get(position);
+        final BluetoothDevice mItemTypeBean = mList.get(position);
         holder.mAvailableDeviceTitle.setText(mItemTypeBean.getName());
         holder.mAvailableDeviceSubtitle.setText(mItemTypeBean.getAddress());
 
@@ -60,10 +62,16 @@ public class LoanDaquanAdapter extends RecyclerView.Adapter<LoanDaquanAdapter.Vi
             @Override
             public void onClick(View v) {
                 if (mOnItemClickListener != null) {
-                    mOnItemClickListener.onItemClick(v, ViewName.ITEM_NAME, position);
+                    mOnItemClickListener.onItemClick(mItemTypeBean);
                 }
             }
         });
+      holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+        @Override
+        public boolean onLongClick(View v) {
+          return mOnItemClickListener.onLongClick(mItemTypeBean);
+        }
+      });
 
     }
 
@@ -96,8 +104,8 @@ public class LoanDaquanAdapter extends RecyclerView.Adapter<LoanDaquanAdapter.Vi
     }
 
     public interface OnItemClickListener {
-        void onItemClick(View view, ViewName viewName, int position);
-
-//    void onItemLongClick(View view, int position);
+        void onItemClick(BluetoothDevice devices);
+        boolean onLongClick(BluetoothDevice devices);
     }
+
 }
