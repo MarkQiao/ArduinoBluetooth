@@ -1,7 +1,10 @@
 package com.mark.arduinobluetooth.adapter;
 
+import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +47,8 @@ public class LoanDaquanAdapter extends RecyclerView.Adapter<LoanDaquanAdapter.Vi
         notifyDataSetChanged();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.ECLAIR)
+    @SuppressLint("MissingPermission")
     @Override
     public void onBindViewHolder(LoanDaquanAdapter.ViewHolder holder, final int position) {
         final BluetoothDevice mItemTypeBean = mList.get(position);
