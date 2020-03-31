@@ -167,11 +167,13 @@ public class BluetoothUtils {
      */
     public void connect(Context mcontext, int type, BluetoothDevice bluetoothDevice, ProgressDialog dialog) {
         try {
+//            bluetoothDevice.connectGatt()
+
             mBluetoothSocket = bluetoothDevice.createRfcommSocketToServiceRecord(mactekHartModemUuid);
             if (mBluetoothSocket != null) {
                 APP.bluetoothSocket = mBluetoothSocket;
                 if (mBluetoothAdapter.isDiscovering()) {
-                    mBluetoothAdapter.cancelDiscovery();
+                    mBluetoothAdapter.cancelDiscovery();  //定制搜索
                 }
                 if (!mBluetoothSocket.isConnected()) {
                     mBluetoothSocket.connect();
@@ -202,8 +204,8 @@ public class BluetoothUtils {
         } catch (IOException e) {
             Log.e("-------->", e.getMessage());
             dialog.dismiss();
-            e.printStackTrace();
             try {
+                APP.bluetoothSocket.close();
                 mBluetoothSocket.close();
             } catch (IOException e1) {
                 e1.printStackTrace();

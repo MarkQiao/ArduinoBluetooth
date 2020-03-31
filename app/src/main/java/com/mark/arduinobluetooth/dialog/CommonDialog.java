@@ -172,11 +172,11 @@ public class CommonDialog extends Dialog {
     /**
      * 点击确定按钮事件
      */
-    public void onPositiveClick();
+    void onPositiveClick();
     /**
      * 点击取消按钮事件
      */
-    public void onNegtiveClick();
+    void onNegtiveClick();
   }
 
   public String getMessage() {

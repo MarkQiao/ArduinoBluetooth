@@ -17,12 +17,12 @@
         android:orientation="horizontal">
 
         <EditText
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginBottom="10dp"
             android:id="@+id/et_send"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
             android:layout_weight="8"
             android:background="@drawable/et_underline_unselected"
             android:hint="请输入发送内容"
@@ -32,6 +32,7 @@
             android:textColorHint="@color/white"
             android:textCursorDrawable="@drawable/my_cursor"
             android:textSize="18sp"
+            android:drawableRight="@drawable/clear_selector"
             android:textStyle="bold" />
 
     </LinearLayout>

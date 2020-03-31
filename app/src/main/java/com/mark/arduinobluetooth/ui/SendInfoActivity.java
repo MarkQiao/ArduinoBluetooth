@@ -1,6 +1,7 @@
 package com.mark.arduinobluetooth.ui;
 
 import android.bluetooth.BluetoothDevice;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.Snackbar;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -74,7 +76,7 @@ public class SendInfoActivity extends AppCompatActivity {
 
     /**
      * 复写：添加菜单布局
-     * */
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu, menu);
@@ -83,7 +85,7 @@ public class SendInfoActivity extends AppCompatActivity {
 
     /**
      * 复写：设置菜单监听
-     * */
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -99,8 +101,6 @@ public class SendInfoActivity extends AppCompatActivity {
         }
         return true;
     }
-
-
 
 
     private void init() {
@@ -125,7 +125,26 @@ public class SendInfoActivity extends AppCompatActivity {
                 return false;
             }
         });
+        et_send.setOnTouchListener(new View.OnTouchListener() {
 
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                // et.getCompoundDrawables()得到一个长度为4的数组，分别表示左右上下四张图片
+                Drawable drawable = et_send.getCompoundDrawables()[2];
+                //如果右边没有图片，不再处理
+                if (drawable == null)
+                    return false;
+                //如果不是按下事件，不再处理
+                if (event.getAction() != MotionEvent.ACTION_UP)
+                    return false;
+                if (event.getX() > et_send.getWidth()
+                        - et_send.getPaddingRight()
+                        - drawable.getIntrinsicWidth()) {
+                    et_send.setText("");
+                }
+                return false;
+            }
+        });
 
     }
 

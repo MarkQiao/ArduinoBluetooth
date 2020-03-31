@@ -130,7 +130,6 @@ public class ScrollingActivity extends AppCompatActivity {
             @Override
             public void onItemClick(final BluetoothDevice devices) {
 
-
                 /**
                  * 开启蓝牙服务端
                  */
@@ -139,7 +138,7 @@ public class ScrollingActivity extends AppCompatActivity {
                 dialog.setOnClickBottomListener(new TypeDialog.OnClickBottomListener() {
                     @Override
                     public void onNegtiveClick(final int type) {
-                        showProgressDialog("正在连接......");
+                        showProgressDialog("正在连接"+devices.getName()+"......");
                         dialog.dismiss();
                         ThreadPoolProxyFactory.getNormalThreadPoolProxy().execute(new Runnable() {
                             @Override
