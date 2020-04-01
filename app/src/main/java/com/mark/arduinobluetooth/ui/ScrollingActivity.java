@@ -39,6 +39,9 @@ import com.mark.arduinobluetooth.util.factory.ThreadPoolProxyFactory;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author wangqiao
+ */
 public class ScrollingActivity extends AppCompatActivity {
     private CollapsingToolbarLayout collapsingToolbarLayout;
     private Animation fabOpen;
@@ -138,12 +141,12 @@ public class ScrollingActivity extends AppCompatActivity {
                 dialog.setOnClickBottomListener(new TypeDialog.OnClickBottomListener() {
                     @Override
                     public void onNegtiveClick(final int type) {
-                        showProgressDialog("正在连接"+devices.getName()+"......");
+                        showProgressDialog("正在连接" + devices.getName() + "......");
                         dialog.dismiss();
                         ThreadPoolProxyFactory.getNormalThreadPoolProxy().execute(new Runnable() {
                             @Override
                             public void run() {
-                                BluetoothUtils.getInstance().connect(ScrollingActivity.this, type,devices, dialogs);
+                                BluetoothUtils.getInstance().connect(ScrollingActivity.this, type, devices, dialogs);
                             }
                         });
                     }
@@ -191,7 +194,6 @@ public class ScrollingActivity extends AppCompatActivity {
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-            Log.d("------------>", action);
             BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
             if (BluetoothAdapter.ACTION_DISCOVERY_STARTED.equals(action)) {
                 showProgressBar();
@@ -248,16 +250,14 @@ public class ScrollingActivity extends AppCompatActivity {
                         break;
                     case BluetoothDevice.BOND_BONDED://配对结束
                         Log.d("BlueToothTestActivity", "完成配对");
-                        if (dialogs != null) {
-                            dialogs.dismiss();
-                        }
+                        hideProgressDialog();
                         mItemSelectDailogAdapter.setData(BluetoothUtils.getInstance().getSaveDeviceList());
                         //            onRegisterBltReceiver.onBltEnd(device);
                         break;
                     case BluetoothDevice.BOND_NONE://取消配对/未配对
                         Log.d("BlueToothTestActivity", "取消配对");
                         if (dialogs != null) {
-                            dialogs.dismiss();
+                            hideProgressDialog();
                         }
                         mItemSelectDailogAdapter.setData(BluetoothUtils.getInstance().getSaveDeviceList());
                     default:

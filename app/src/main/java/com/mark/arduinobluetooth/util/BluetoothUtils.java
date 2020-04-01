@@ -13,6 +13,7 @@ import android.os.Build;
 import android.util.Log;
 
 import com.mark.arduinobluetooth.APP;
+import com.mark.arduinobluetooth.ui.GameActivity;
 import com.mark.arduinobluetooth.ui.ProgressActivity;
 import com.mark.arduinobluetooth.ui.SendInfoActivity;
 
@@ -182,7 +183,7 @@ public class BluetoothUtils {
                 Intent intent = null;
                 switch (type) {
                     case 0:
-                        intent = new Intent(mcontext, ProgressActivity.class);
+                        intent = new Intent(mcontext, GameActivity.class);
                         break;
                     case 1:
                         intent = new Intent(mcontext, ProgressActivity.class);

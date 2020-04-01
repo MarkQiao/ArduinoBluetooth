@@ -98,15 +98,74 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="paired_devices">连接设备</string>
     <string name="available_devices">可用设备</string>
-    <string name="appVersionTitle">Build version</string>
-    <string name="share">Share</string>
-    <string name="rateUs">Rate this app</string>
-    <string name="action_about">About</string>
-    <string name="action_scan">Scan</string>
+    <string name="appVersionTitle">迭代版本</string>
+    <string name="share">分享</string>
+    <string name="rateUs">开源地址</string>
+    <string name="action_about">关于</string>
+    <string name="action_scan">扫描</string>
 
     <string name="connection_mode_controller">Controller mode</string>
     <string name="connection_mode_dimmer">Dimmer mode</string>
     <string name="connection_mode_message">Connect in</string>
     <string name="connection_mode_switch">Switch mode</string>
     <string name="connection_mode_terminal">Terminal mode</string>
+    <string name="abc_action_bar_home_description">Navigate home</string>
+    <string name="abc_action_bar_home_description_format">%1$s, %2$s</string>
+    <string name="abc_action_bar_home_subtitle_description_format">%1$s, %2$s, %3$s</string>
+    <string name="abc_action_bar_up_description">Navigate up</string>
+    <string name="abc_action_menu_overflow_description">More options</string>
+    <string name="abc_action_mode_done">Done</string>
+    <string name="abc_activity_chooser_view_see_all">See all</string>
+    <string name="abc_activitychooserview_choose_application">Choose an app</string>
+    <string name="abc_capital_off">OFF</string>
+    <string name="abc_capital_on">ON</string>
+    <string name="abc_search_hint">Search…</string>
+    <string name="abc_searchview_description_clear">Clear query</string>
+    <string name="abc_searchview_description_query">Search query</string>
+    <string name="abc_searchview_description_search">Search</string>
+    <string name="abc_searchview_description_submit">Submit query</string>
+    <string name="abc_searchview_description_voice">Voice search</string>
+    <string name="abc_shareactionprovider_share_with">Share with</string>
+    <string name="abc_shareactionprovider_share_with_application">Share with %s</string>
+    <string name="abc_toolbar_collapse_description">Collapse</string>
+    <string name="status_bar_notification_info_overflow">999+</string>
+
+    <string name="action_connect">Connect</string>
+    <string name="action_controller_load_mapping">Load mapping</string>
+    <string name="action_controller_mapping">Controller mapping</string>
+    <string name="action_controller_save_mapping">Save mapping</string>
+
+    <string name="action_switch_mapping">Switch mapping</string>
+    <string name="action_unpair">Unpair</string>
+
+    <string name="available_device_found">Available device</string>
+
+    <string name="bluetooth_disabled">You have to enable bluetooth to use this app</string>
+    <string name="bluetooth_unsupported">Ooops, this device does not support bluetooth</string>
+    <string name="config_joystick_header_message">用自己的命令设置操纵杆按钮进行发送</string>
+    <string name="config_switch_header_message">Setup the switch with your own \"on\" and \"off\" commands</string>
+
+    <string name="controller_command_not_set">未设置</string>
+    <string name="controller_mode_no_profiles_action">Configure</string>
+    <string name="controller_mode_no_profiles_message">The controller is not configured</string>
+    <string name="device_connection_failed">Problems occurred while connecting to remote device, please restart it</string>
+    <string name="device_disconnection">The remote device disconnected</string>
+    <string name="device_not_connected">paired, not connected</string>
+    <string name="no_paired_devices">No paired devices</string>
+
+    <string name="pairing">pairing with</string>
+
+    <string name="splash_title">bluetooth remote for arduino</string>
+    <string name="switch_mode_no_profiles_message">The switch is not configured</string>
+    <string name="terminal_mode_edittexthint">type in command</string>
+    <string name="thanks"></string>
+    <string name="tutorial_slide1_subtitle">build your own project with Arduino</string>
+    <string name="tutorial_slide1_title">Invent</string>
+    <string name="tutorial_slide2_subtitle">link your Arduino board with a bluetooth module</string>
+    <string name="tutorial_slide2_title">Connect</string>
+    <string name="tutorial_slide3_subtitle">use your Android device as remote control for your project</string>
+    <string name="tutorial_slide3_title">Control</string>
+    <string name="appbar_scrolling_view_behavior">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="bottom_sheet_behavior">android.support.design.widget.BottomSheetBehavior</string>
+    <string name="character_counter_pattern">%1$d / %2$d</string>
 </resources>

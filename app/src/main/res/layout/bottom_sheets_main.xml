@@ -29,7 +29,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="8.0dip"
             android:layout_toRightOf="@id/google_play_icon"
-            android:text="@string/rateUs"
+            android:text="@string/action_about"
             android:textColor="@color/black"
             android:textSize="16.0dip" />
     </RelativeLayout>

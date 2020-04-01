@@ -14,7 +14,7 @@
     <item
         android:id="@+id/action_add"
         android:icon="@drawable/icon_setting"
-        android:title="Add"
+        android:title="Settings"
         app:showAsAction="ifRoom" />
 
 </menu>
