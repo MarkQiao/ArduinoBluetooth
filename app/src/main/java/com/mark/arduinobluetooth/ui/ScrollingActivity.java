@@ -11,14 +11,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,6 +20,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.google.android.material.appbar.CollapsingToolbarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.mark.arduinobluetooth.R;
 import com.mark.arduinobluetooth.adapter.LoanDaquanAdapter;
 import com.mark.arduinobluetooth.dialog.CommonDialog;
@@ -38,6 +32,13 @@ import com.mark.arduinobluetooth.util.factory.ThreadPoolProxyFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * @author wangqiao
@@ -173,13 +174,11 @@ public class ScrollingActivity extends AppCompatActivity {
             public void onPositiveClick() {
                 dialog.dismiss();
                 BluetoothUtils.getInstance().unpairDevice(devices);
-                Toast.makeText(ScrollingActivity.this, "确定", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onNegtiveClick() {
                 dialog.dismiss();
-                Toast.makeText(ScrollingActivity.this, "取消", Toast.LENGTH_SHORT).show();
             }
         }).show();
     }
@@ -210,6 +209,7 @@ public class ScrollingActivity extends AppCompatActivity {
                                 Toast.makeText(context, "蓝牙正在打开", Toast.LENGTH_SHORT).show();
                                 break;
                             case BluetoothAdapter.STATE_ON:
+                                mItemSelectDailogAdapter.setData(BluetoothUtils.getInstance().getSaveDeviceList());
                                 Toast.makeText(context, "蓝牙已经打开", Toast.LENGTH_SHORT).show();
                                 break;
                             case BluetoothAdapter.STATE_TURNING_OFF:

@@ -165,7 +165,7 @@
     <string name="tutorial_slide2_title">Connect</string>
     <string name="tutorial_slide3_subtitle">use your Android device as remote control for your project</string>
     <string name="tutorial_slide3_title">Control</string>
-    <string name="appbar_scrolling_view_behavior">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
+    <string name="appbar_scrolling_view_behavior">com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior</string>
     <string name="bottom_sheet_behavior">android.support.design.widget.BottomSheetBehavior</string>
     <string name="character_counter_pattern">%1$d / %2$d</string>
 </resources>

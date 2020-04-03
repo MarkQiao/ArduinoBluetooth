@@ -10,6 +10,8 @@
 
     <application
         android:name=".APP"
+        tools:replace="android:appComponentFactory"
+        android:appComponentFactory=" "
         android:allowBackup="true"
         android:icon="@mipmap/logo"
         android:label="@string/app_name"
@@ -22,6 +24,7 @@
             android:launchMode="singleTask"
             android:screenOrientation="landscape"
             tools:ignore="LockedOrientationActivity" />
+
         <activity android:name=".ui.ProgressActivity" />
         <activity
             android:name=".ui.SendInfoActivity"
@@ -41,8 +44,6 @@
             <intent-filter>
                 <action android:name="android.bluetooth.device.action.ACL_CONNECTED" />
                 <action android:name="android.bluetooth.device.action.ACL_DISCONNECTED" />
-                <action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
-                <action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
                 <action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
             </intent-filter>
         </receiver>

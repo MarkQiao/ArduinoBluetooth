@@ -2,7 +2,6 @@ package com.mark.arduinobluetooth.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,6 +15,8 @@ import com.mark.arduinobluetooth.service.SendSocketService;
 
 import java.io.IOException;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 /**
  * @author wangqiao
  */
@@ -27,7 +28,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
-        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle(getIntent().getStringExtra("DeviceName"));
             actionBar.setHomeButtonEnabled(true);

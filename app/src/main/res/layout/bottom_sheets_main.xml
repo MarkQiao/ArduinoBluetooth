@@ -7,7 +7,7 @@
     android:layout_height="280.0dip"
     android:clickable="true"
     android:orientation="vertical"
-    app:layout_behavior="@string/bottom_sheet_behavior">
+   >
 
     <RelativeLayout
         android:id="@+id/google_play_item"

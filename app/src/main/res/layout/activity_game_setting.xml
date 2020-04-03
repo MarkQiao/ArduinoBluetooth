@@ -41,9 +41,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
                 android:ellipsize="end"
+                android:hint="@string/controller_command_not_set"
                 android:maxLines="1"
-                android:text="@string/controller_command_not_set"
                 android:textSize="16.0dip" />
 
             <EditText
@@ -80,9 +82,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
                 android:ellipsize="end"
+                android:hint="@string/controller_command_not_set"
                 android:maxLines="1"
-                android:text="@string/controller_command_not_set"
                 android:textSize="16.0dip" />
 
             <EditText
@@ -119,9 +123,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
                 android:ellipsize="end"
+                android:hint="@string/controller_command_not_set"
                 android:maxLines="1"
-                android:text="@string/controller_command_not_set"
                 android:textSize="16.0dip" />
 
             <EditText
@@ -158,9 +164,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
                 android:ellipsize="end"
+                android:hint="@string/controller_command_not_set"
                 android:maxLines="1"
-                android:text="@string/controller_command_not_set"
                 android:textSize="16.0dip" />
 
             <EditText
@@ -202,9 +210,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
                 android:ellipsize="end"
+                android:hint="@string/controller_command_not_set"
                 android:maxLines="1"
-                android:text="@string/controller_command_not_set"
                 android:textSize="16.0dip" />
 
             <EditText
@@ -246,9 +256,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
                 android:ellipsize="end"
+                android:hint="@string/controller_command_not_set"
                 android:maxLines="1"
-                android:text="@string/controller_command_not_set"
                 android:textSize="16.0dip" />
 
             <EditText
@@ -285,9 +297,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
                 android:ellipsize="end"
+                android:hint="@string/controller_command_not_set"
                 android:maxLines="1"
-                android:text="@string/controller_command_not_set"
                 android:textSize="16.0dip" />
 
             <EditText
@@ -324,9 +338,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
                 android:ellipsize="end"
+                android:hint="@string/controller_command_not_set"
                 android:maxLines="1"
-                android:text="@string/controller_command_not_set"
                 android:textSize="16.0dip" />
 
             <EditText
@@ -363,9 +379,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
                 android:ellipsize="end"
+                android:hint="@string/controller_command_not_set"
                 android:maxLines="1"
-                android:text="@string/controller_command_not_set"
                 android:textSize="16.0dip" />
 
             <EditText
@@ -403,9 +421,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
                 android:ellipsize="end"
+                android:hint="@string/controller_command_not_set"
                 android:maxLines="1"
-                android:text="@string/controller_command_not_set"
                 android:textSize="16.0dip" />
 
             <EditText

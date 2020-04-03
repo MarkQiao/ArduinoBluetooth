@@ -4,8 +4,6 @@ import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +14,8 @@ import com.mark.arduinobluetooth.R;
 
 import java.util.List;
 
+import androidx.annotation.RequiresApi;
+import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -42,8 +42,9 @@ public class LoanDaquanAdapter extends RecyclerView.Adapter<LoanDaquanAdapter.Vi
         View view = LayoutInflater.from(mContext).inflate(R.layout.item_available_device, parent, false);
         return new LoanDaquanAdapter.ViewHolder(view);
     }
-    public void setData(List<BluetoothDevice> list){
-        this.mList=list;
+
+    public void setData(List<BluetoothDevice> list) {
+        this.mList = list;
         notifyDataSetChanged();
     }
 
@@ -52,7 +53,12 @@ public class LoanDaquanAdapter extends RecyclerView.Adapter<LoanDaquanAdapter.Vi
     @Override
     public void onBindViewHolder(LoanDaquanAdapter.ViewHolder holder, final int position) {
         final BluetoothDevice mItemTypeBean = mList.get(position);
-        holder.mAvailableDeviceTitle.setText(mItemTypeBean.getName());
+        if (mItemTypeBean.getName() == null) {
+            holder.mAvailableDeviceTitle.setText("未知");
+        } else {
+            holder.mAvailableDeviceTitle.setText(mItemTypeBean.getName());
+        }
+
         holder.mAvailableDeviceSubtitle.setText(mItemTypeBean.getAddress());
 
         if (256 == mItemTypeBean.getBluetoothClass().getMajorDeviceClass()) {
@@ -71,12 +77,12 @@ public class LoanDaquanAdapter extends RecyclerView.Adapter<LoanDaquanAdapter.Vi
                 }
             }
         });
-      holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-        @Override
-        public boolean onLongClick(View v) {
-          return mOnItemClickListener.onLongClick(mItemTypeBean);
-        }
-      });
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                return mOnItemClickListener.onLongClick(mItemTypeBean);
+            }
+        });
 
     }
 
@@ -110,6 +116,7 @@ public class LoanDaquanAdapter extends RecyclerView.Adapter<LoanDaquanAdapter.Vi
 
     public interface OnItemClickListener {
         void onItemClick(BluetoothDevice devices);
+
         boolean onLongClick(BluetoothDevice devices);
     }
 

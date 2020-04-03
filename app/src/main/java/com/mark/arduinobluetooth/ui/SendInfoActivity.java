@@ -4,8 +4,6 @@ import android.bluetooth.BluetoothDevice;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.mark.arduinobluetooth.APP;
 import com.mark.arduinobluetooth.R;
 import com.mark.arduinobluetooth.service.GetInfo;
@@ -27,6 +26,8 @@ import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.IOException;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import static com.mark.arduinobluetooth.util.factory.ThreadPoolProxyFactory.getNormalThreadPoolProxy;
 
@@ -44,7 +45,7 @@ public class SendInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_send_info);
 
         setTitle(getIntent().getStringExtra("DeviceName"));
-        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setHomeButtonEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -167,7 +168,7 @@ public class SendInfoActivity extends AppCompatActivity {
                             }
                         });
                 bar.getView().setBackgroundColor(getResources().getColor(R.color.white));
-                ((TextView) bar.getView().findViewById(android.support.design.R.id.snackbar_text)).setTextColor(getResources().getColor(R.color.black));
+//                ((TextView) bar.getView().findViewById(android.support.design.R.id.snackbar_text)).setTextColor(getResources().getColor(R.color.black));
                 bar.show();
 
                 break;
