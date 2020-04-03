@@ -5,29 +5,38 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 import com.mark.arduinobluetooth.APP;
+import com.mark.arduinobluetooth.GlobalConstant;
 import com.mark.arduinobluetooth.R;
 import com.mark.arduinobluetooth.controls.ArrowButtonControl;
 import com.mark.arduinobluetooth.controls.BEnum;
 import com.mark.arduinobluetooth.controls.ControllerButtonControl;
+import com.mark.arduinobluetooth.db.DBUtil;
 import com.mark.arduinobluetooth.service.SendSocketService;
 
 import java.io.IOException;
 
 import androidx.appcompat.app.AppCompatActivity;
+import butterknife.ButterKnife;
 
 /**
  * @author wangqiao
  */
 public class GameActivity extends AppCompatActivity implements View.OnClickListener {
+
+
     ArrowButtonControl controller_arrowLeft, controller_arrowTop, controller_arrowBottom, controller_arrowRight;
     ControllerButtonControl controller_buttonLeft, controller_buttonBottom, controller_buttonTop, controller_buttonRight;
+    Button centerButton1, centerButton2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        //绑定处理
+        ButterKnife.bind(this);
         androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle(getIntent().getStringExtra("DeviceName"));
@@ -35,15 +44,20 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
+        centerButton1 = findViewById(R.id.centerButton1);
+        centerButton2 = findViewById(R.id.centerButton2);
+
         controller_arrowLeft = findViewById(R.id.controller_arrowLeft);
         controller_arrowTop = findViewById(R.id.controller_arrowTop);
         controller_arrowBottom = findViewById(R.id.controller_arrowBottom);
         controller_arrowRight = findViewById(R.id.controller_arrowRight);
 
+
         controller_arrowLeft.setSymbol(BEnum.left);
         controller_arrowTop.setSymbol(BEnum.up);
         controller_arrowBottom.setSymbol(BEnum.down);
         controller_arrowRight.setSymbol(BEnum.right);
+
 
         controller_arrowLeft.setBackgroundColor(getResources().getColor(R.color.joystick_darker_background));
         controller_arrowLeft.setBackgroundPressedColor(getResources().getColor(R.color.joystick_darker_pressed_background));
@@ -104,6 +118,9 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         controller_buttonTop.setOnClickListener(this);
         controller_buttonBottom.setOnClickListener(this);
         controller_buttonRight.setOnClickListener(this);
+
+        centerButton1.setOnClickListener(this);
+        centerButton2.setOnClickListener(this);
     }
 
     /**
@@ -149,28 +166,34 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.controller_arrowTop:
-                SendSocketService.sendMessage("up");
+                SendSocketService.sendMessage(DBUtil.getValueBean(GlobalConstant.UpArrow).getValue());
                 break;
             case R.id.controller_arrowBottom:
-                SendSocketService.sendMessage("Bottom");
+                SendSocketService.sendMessage(DBUtil.getValueBean(GlobalConstant.DownArrow).getValue());
                 break;
             case R.id.controller_arrowLeft:
-                SendSocketService.sendMessage("Left");
+                SendSocketService.sendMessage(DBUtil.getValueBean(GlobalConstant.LeftArrow).getValue());
                 break;
             case R.id.controller_arrowRight:
-                SendSocketService.sendMessage("Right");
+                SendSocketService.sendMessage(DBUtil.getValueBean(GlobalConstant.RightArrow).getValue());
+                break;
+            case R.id.centerButton1:
+                SendSocketService.sendMessage(DBUtil.getValueBean(GlobalConstant.SelectButton).getValue());
+                break;
+            case R.id.centerButton2:
+                SendSocketService.sendMessage(DBUtil.getValueBean(GlobalConstant.StartButton).getValue());
                 break;
             case R.id.controller_buttonTop:
-                SendSocketService.sendMessage("buttonTop");
+                SendSocketService.sendMessage(DBUtil.getValueBean(GlobalConstant.UpButton).getValue());
                 break;
             case R.id.controller_buttonBottom:
-                SendSocketService.sendMessage("buttonBottom");
+                SendSocketService.sendMessage(DBUtil.getValueBean(GlobalConstant.DownButton).getValue());
                 break;
             case R.id.controller_buttonLeft:
-                SendSocketService.sendMessage("buttonLeft");
+                SendSocketService.sendMessage(DBUtil.getValueBean(GlobalConstant.leftButton).getValue());
                 break;
             case R.id.controller_buttonRight:
-                SendSocketService.sendMessage("buttonRight");
+                SendSocketService.sendMessage(DBUtil.getValueBean(GlobalConstant.RightButton).getValue());
                 break;
             default:
                 break;

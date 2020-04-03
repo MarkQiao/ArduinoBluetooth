@@ -1,7 +1,7 @@
 package com.mark.arduinobluetooth.db;
 
 import io.realm.RealmObject;
-import io.realm.annotations.PrimaryKey;
+import io.realm.annotations.RealmClass;
 
 /**
  * @ClassName: ValueBean
@@ -10,8 +10,9 @@ import io.realm.annotations.PrimaryKey;
  * @CreateDate: 2020/3/31 5:15 PM
  * @Version: 1.0
  */
+@RealmClass
 public class ValueBean extends RealmObject {
-    @PrimaryKey
+
     private int type;
     private String value;
 

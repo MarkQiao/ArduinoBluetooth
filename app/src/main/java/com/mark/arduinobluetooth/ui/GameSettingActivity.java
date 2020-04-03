@@ -10,7 +10,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.mark.arduinobluetooth.GlobalConstant;
 import com.mark.arduinobluetooth.R;
+import com.mark.arduinobluetooth.db.DBUtil;
 
 import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
@@ -110,7 +112,7 @@ public class GameSettingActivity extends AppCompatActivity {
         config_upButton.setColorFilter(getResources().getColor(R.color.arduinoBrown1));
         config_rightButton.setColorFilter(getResources().getColor(R.color.arduinoYellow2));
         config_downButton.setColorFilter(getResources().getColor(R.color.arduinoGray1));
-
+        getViewValue();
 
     }
 
@@ -178,9 +180,38 @@ public class GameSettingActivity extends AppCompatActivity {
             if (i == EditorInfo.IME_ACTION_DONE) {
                 tv.setText(et.getText().toString());
                 ShowOrHideView(tv, et, true);
+                setViewValue();
             }
             return false;
         });
+    }
+
+    private void getViewValue() {
+        configLeftArrowCommand.setText(DBUtil.getValueBean(GlobalConstant.LeftArrow).getValue());
+        configUpArrowCommand.setText(DBUtil.getValueBean(GlobalConstant.UpArrow).getValue());
+        configRightArrowCommand.setText(DBUtil.getValueBean(GlobalConstant.RightArrow).getValue());
+        configDownArrowCommand.setText(DBUtil.getValueBean(GlobalConstant.DownArrow).getValue());
+        configSelectButtonCommand.setText(DBUtil.getValueBean(GlobalConstant.SelectButton).getValue());
+        configStartButtonCommand.setText(DBUtil.getValueBean(GlobalConstant.StartButton).getValue());
+        configLeftButtonCommand.setText(DBUtil.getValueBean(GlobalConstant.leftButton).getValue());
+        configUpButtonCommand.setText(DBUtil.getValueBean(GlobalConstant.UpButton).getValue());
+        configRightButtonCommand.setText(DBUtil.getValueBean(GlobalConstant.RightButton).getValue());
+        configDownButtonCommand.setText(DBUtil.getValueBean(GlobalConstant.DownButton).getValue());
+    }
+
+    private void setViewValue() {
+        DBUtil.saveValueBean(GlobalConstant.LeftArrow, configLeftArrowCommand.getText().toString());
+        DBUtil.saveValueBean(GlobalConstant.UpArrow, configUpArrowCommand.getText().toString());
+        DBUtil.saveValueBean(GlobalConstant.RightArrow, configRightArrowCommand.getText().toString());
+        DBUtil.saveValueBean(GlobalConstant.DownArrow, configDownArrowCommand.getText().toString());
+
+        DBUtil.saveValueBean(GlobalConstant.SelectButton, configSelectButtonCommand.getText().toString());
+        DBUtil.saveValueBean(GlobalConstant.StartButton, configStartButtonCommand.getText().toString());
+
+        DBUtil.saveValueBean(GlobalConstant.leftButton, configLeftButtonCommand.getText().toString());
+        DBUtil.saveValueBean(GlobalConstant.UpButton, configUpButtonCommand.getText().toString());
+        DBUtil.saveValueBean(GlobalConstant.RightButton, configRightButtonCommand.getText().toString());
+        DBUtil.saveValueBean(GlobalConstant.DownButton, configDownButtonCommand.getText().toString());
 
     }
 

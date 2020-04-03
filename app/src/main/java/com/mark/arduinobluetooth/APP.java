@@ -18,14 +18,12 @@ public class APP extends Application {
     public void onCreate() {
         super.onCreate();
         context = getApplicationContext();
-        // Initialize Realm (just once per application)
-        Realm.init(context);
 
-        // Get a Realm instance for this thread
+        Realm.init(context);
         RealmConfiguration configuration = new RealmConfiguration.Builder()
                 .name("arduino.realm")
                 .schemaVersion(2)
-                //                .migration(new CustomMigration())//升级数据库
+                //.migration(new CustomMigration())//升级数据库
                 //.deleteRealmIfMigrationNeeded()
                 .build();
 
