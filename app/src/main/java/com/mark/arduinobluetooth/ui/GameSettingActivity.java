@@ -115,7 +115,9 @@ public class GameSettingActivity extends AppCompatActivity {
     }
 
     //按钮点击事件处理
-    @OnClick({R.id.config_leftArrow_command, R.id.config_upArrow_command, R.id.config_rightArrow_command, R.id.config_downArrow_command, R.id.config_selectButton_command})
+    @OnClick({R.id.config_leftArrow_command, R.id.config_upArrow_command, R.id.config_rightArrow_command, R.id.config_downArrow_command,
+            R.id.config_selectButton_command, R.id.config_startButton_command,
+            R.id.config_upButton_command, R.id.config_leftButton_command, R.id.config_rightButton_command, R.id.config_downButton_command})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.config_leftArrow_command:
@@ -132,6 +134,21 @@ public class GameSettingActivity extends AppCompatActivity {
                 break;
             case R.id.config_selectButton_command:
                 Operate(configSelectButtonCommand, configSelectButtonCommandEditText);
+                break;
+            case R.id.config_startButton_command:
+                Operate(configStartButtonCommand, configStartButtonCommandEditText);
+                break;
+            case R.id.config_upButton_command:
+                Operate(configUpButtonCommand, configUpButtonCommandEditText);
+                break;
+            case R.id.config_leftButton_command:
+                Operate(configLeftButtonCommand, configLeftButtonCommandEditText);
+                break;
+            case R.id.config_rightButton_command:
+                Operate(configRightButtonCommand, configRightButtonCommandEditText);
+                break;
+            case R.id.config_downButton_command:
+                Operate(configDownButtonCommand, configDownButtonCommandEditText);
                 break;
             default:
                 break;
