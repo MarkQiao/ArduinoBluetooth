@@ -4,8 +4,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -13,6 +11,9 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.mark.arduinobluetooth.R;
+
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 
 /**
  * @ClassName: TypeDialog
@@ -59,10 +60,10 @@ public class TypeDialog extends Dialog {
         dimmer = findViewById(R.id.dimmer);
         terminal = findViewById(R.id.terminal);
 
-        controllerImage.setImageTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.tomato)));
-        switchImage.setImageTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.tomato)));
-        dimmerImage.setImageTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.tomato)));
-        terminalImage.setImageTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.tomato)));
+        controllerImage.setImageTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.colorPrimaryDark)));
+        switchImage.setImageTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.colorPrimaryDark)));
+        dimmerImage.setImageTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.colorPrimaryDark)));
+        terminalImage.setImageTintList(ColorStateList.valueOf(ContextCompat.getColor(mContext, R.color.colorPrimaryDark)));
         controllerImage.setAnimation(fabOpen);
         switchImage.setAnimation(fabOpen);
         dimmerImage.setAnimation(fabOpen);

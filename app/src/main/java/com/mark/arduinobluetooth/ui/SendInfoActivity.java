@@ -1,6 +1,7 @@
 package com.mark.arduinobluetooth.ui;
 
 import android.bluetooth.BluetoothDevice;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -161,14 +162,9 @@ public class SendInfoActivity extends AppCompatActivity {
         switch (message.type) {
             case BluetoothDevice.ACTION_ACL_DISCONNECTED:
                 Snackbar bar = Snackbar.make(et_send, message.message, Snackbar.LENGTH_INDEFINITE)
-                        .setAction("ok", new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                finish();
-                            }
-                        });
+                        .setAction("ok", v -> finish());
                 bar.getView().setBackgroundColor(getResources().getColor(R.color.white));
-//                ((TextView) bar.getView().findViewById(android.support.design.R.id.snackbar_text)).setTextColor(getResources().getColor(R.color.black));
+                ((TextView)bar.getView().findViewById(R.id.snackbar_text)).setTextColor(Color.BLACK);
                 bar.show();
 
                 break;

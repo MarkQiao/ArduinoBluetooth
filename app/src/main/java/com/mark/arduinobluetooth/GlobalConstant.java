@@ -21,5 +21,6 @@ public class GlobalConstant {
     public static int RightButton = 8;
     public static int DownButton = 9;
 
+    public static String ValueNULL = "1241";
 
 }

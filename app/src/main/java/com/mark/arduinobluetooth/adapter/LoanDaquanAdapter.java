@@ -69,20 +69,12 @@ public class LoanDaquanAdapter extends RecyclerView.Adapter<LoanDaquanAdapter.Vi
             holder.mItemImg.setImageResource(R.drawable.ic_devices_other_black_24dp);
         }
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mOnItemClickListener != null) {
-                    mOnItemClickListener.onItemClick(mItemTypeBean);
-                }
+        holder.itemView.setOnClickListener(v -> {
+            if (mOnItemClickListener != null) {
+                mOnItemClickListener.onItemClick(mItemTypeBean);
             }
         });
-        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                return mOnItemClickListener.onLongClick(mItemTypeBean);
-            }
-        });
+        holder.itemView.setOnLongClickListener(v -> mOnItemClickListener.onLongClick(mItemTypeBean));
 
     }
 

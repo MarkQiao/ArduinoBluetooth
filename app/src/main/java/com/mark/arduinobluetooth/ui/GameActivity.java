@@ -1,12 +1,16 @@
 package com.mark.arduinobluetooth.ui;
 
+import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.mark.arduinobluetooth.APP;
 import com.mark.arduinobluetooth.GlobalConstant;
 import com.mark.arduinobluetooth.R;
@@ -15,6 +19,11 @@ import com.mark.arduinobluetooth.controls.BEnum;
 import com.mark.arduinobluetooth.controls.ControllerButtonControl;
 import com.mark.arduinobluetooth.db.DBUtil;
 import com.mark.arduinobluetooth.service.SendSocketService;
+import com.mark.arduinobluetooth.util.MessageWrap;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.IOException;
 
@@ -43,7 +52,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
             actionBar.setHomeButtonEnabled(true);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
+        EventBus.getDefault().register(this);
         centerButton1 = findViewById(R.id.centerButton1);
         centerButton2 = findViewById(R.id.centerButton2);
 
@@ -155,10 +164,35 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        EventBus.getDefault().unregister(this);
         try {
             APP.bluetoothSocket.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onGetMessage(MessageWrap message) {
+        switch (message.type) {
+            case BluetoothDevice.ACTION_ACL_DISCONNECTED:
+                Snackbar bar = Snackbar.make(controller_arrowBottom, message.message, Snackbar.LENGTH_INDEFINITE)
+                        .setAction("ok", v -> finish());
+                bar.getView().setBackgroundColor(getResources().getColor(R.color.white));
+                ((TextView)bar.getView().findViewById(R.id.snackbar_text)).setTextColor(Color.BLACK);
+                bar.show();
+                break;
+
+            case "1241":
+                Snackbar bars = Snackbar.make(controller_arrowBottom, message.message, Snackbar.LENGTH_INDEFINITE)
+                        .setAction("ok", v ->
+                                this.startActivity(new Intent(this, GameSettingActivity.class)));
+                bars.getView().setBackgroundColor(getResources().getColor(R.color.white));
+                ((TextView)bars.getView().findViewById(R.id.snackbar_text)).setTextColor(Color.BLACK);
+                bars.show();
+                break;
+            default:
+                break;
         }
     }
 

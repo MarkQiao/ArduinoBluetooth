@@ -3,6 +3,7 @@ package com.mark.arduinobluetooth.ui;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -99,6 +100,15 @@ public class GameSettingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game_setting);
         //绑定处理
         ButterKnife.bind(this);
+
+        androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle("");
+            actionBar.setHomeButtonEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+
+        }
+
         initView();
     }
 
@@ -156,6 +166,23 @@ public class GameSettingActivity extends AppCompatActivity {
                 break;
         }
     }
+    /**
+     * 复写：设置菜单监听
+     */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            //actionbar navigation up 按钮
+            case android.R.id.home:
+                finish();
+                break;
+            default:
+                break;
+        }
+        return true;
+    }
+
+
 
     private void initEsitTextHide() {
         ShowOrHideView(configLeftArrowCommand, configLeftArrowCommandEditText, true);
@@ -168,6 +195,7 @@ public class GameSettingActivity extends AppCompatActivity {
         ShowOrHideView(configUpButtonCommand, configUpButtonCommandEditText, true);
         ShowOrHideView(configRightButtonCommand, configRightButtonCommandEditText, true);
         ShowOrHideView(configDownButtonCommand, configDownButtonCommandEditText, true);
+
     }
 
     @SuppressLint("ClickableViewAccessibility")
