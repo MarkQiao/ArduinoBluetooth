@@ -99,6 +99,7 @@ public class AnalogController extends View {
       circlePaint.setColor(Color.parseColor("#F9F8F8"));
       canvas.drawCircle(x, y, ((float) radius / 18), circlePaint);
     }
+
     for (int i = 3; i <= deg3; i++) {
       float tmp = (float) i / 24;
       x = midx + (float) (radius * Math.sin(2 * Math.PI * (1.0 - tmp)));

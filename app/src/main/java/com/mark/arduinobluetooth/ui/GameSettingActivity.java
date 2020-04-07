@@ -183,7 +183,6 @@ public class GameSettingActivity extends AppCompatActivity {
     }
 
 
-
     private void initEsitTextHide() {
         ShowOrHideView(configLeftArrowCommand, configLeftArrowCommandEditText, true);
         ShowOrHideView(configUpArrowCommand, configUpArrowCommandEditText, true);
