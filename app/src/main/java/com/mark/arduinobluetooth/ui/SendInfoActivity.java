@@ -9,7 +9,6 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,7 +16,6 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 import com.mark.arduinobluetooth.APP;
 import com.mark.arduinobluetooth.R;
-import com.mark.arduinobluetooth.service.GetInfo;
 import com.mark.arduinobluetooth.service.ReceiveSocketService;
 import com.mark.arduinobluetooth.service.SendSocketService;
 import com.mark.arduinobluetooth.util.MessageWrap;
@@ -57,22 +55,10 @@ public class SendInfoActivity extends AppCompatActivity {
         et_send = findViewById(R.id.et_send);
         init();
         //开启消息接收端
-        getNormalThreadPoolProxy().execute(new Runnable() {
-            @Override
-            public void run() {
-                new ReceiveSocketService().receiveMessage(new GetInfo() {
-                    @Override
-                    public void ongetinfo(final String str) {
-                        new Handler(getMainLooper()).post(new Runnable() {
-                            @Override
-                            public void run() {
-                                update("服务:  ", str);
-                            }
-                        });
-                    }
-                });
-            }
-        });
+        getNormalThreadPoolProxy().execute(()
+                -> new ReceiveSocketService().receiveMessage(
+                str -> new Handler(
+                        getMainLooper()).post(() -> update("服务:  ", str))));
     }
 
 
@@ -127,25 +113,21 @@ public class SendInfoActivity extends AppCompatActivity {
                 return false;
             }
         });
-        et_send.setOnTouchListener(new View.OnTouchListener() {
-
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                // et.getCompoundDrawables()得到一个长度为4的数组，分别表示左右上下四张图片
-                Drawable drawable = et_send.getCompoundDrawables()[2];
-                //如果右边没有图片，不再处理
-                if (drawable == null)
-                    return false;
-                //如果不是按下事件，不再处理
-                if (event.getAction() != MotionEvent.ACTION_UP)
-                    return false;
-                if (event.getX() > et_send.getWidth()
-                        - et_send.getPaddingRight()
-                        - drawable.getIntrinsicWidth()) {
-                    et_send.setText("");
-                }
+        et_send.setOnTouchListener((v, event) -> {
+            // et.getCompoundDrawables()得到一个长度为4的数组，分别表示左右上下四张图片
+            Drawable drawable = et_send.getCompoundDrawables()[2];
+            //如果右边没有图片，不再处理
+            if (drawable == null)
                 return false;
+            //如果不是按下事件，不再处理
+            if (event.getAction() != MotionEvent.ACTION_UP)
+                return false;
+            if (event.getX() > et_send.getWidth()
+                    - et_send.getPaddingRight()
+                    - drawable.getIntrinsicWidth()) {
+                et_send.setText("");
             }
+            return false;
         });
 
     }
@@ -164,7 +146,7 @@ public class SendInfoActivity extends AppCompatActivity {
                 Snackbar bar = Snackbar.make(et_send, message.message, Snackbar.LENGTH_INDEFINITE)
                         .setAction("ok", v -> finish());
                 bar.getView().setBackgroundColor(getResources().getColor(R.color.white));
-                ((TextView)bar.getView().findViewById(R.id.snackbar_text)).setTextColor(Color.BLACK);
+                ((TextView) bar.getView().findViewById(R.id.snackbar_text)).setTextColor(Color.BLACK);
                 bar.show();
 
                 break;

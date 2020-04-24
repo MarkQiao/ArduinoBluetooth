@@ -81,7 +81,7 @@ public class ScrollingActivity extends AppCompatActivity {
 
     public void init() {
         dialogs = new ProgressDialog(ScrollingActivity.this);
-        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //设置收缩展开toolbar字体颜色
         setSupportActionBar(toolbar);

@@ -39,6 +39,8 @@ public class BluetoothStateBroadcastReceive extends BroadcastReceiver {
                     case BluetoothAdapter.STATE_ON:
                         Toast.makeText(context, "蓝牙已开启", Toast.LENGTH_SHORT).show();
                         break;
+                    default:
+                        break;
                 }
                 break;
             default:
