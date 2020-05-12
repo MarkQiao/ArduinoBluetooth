@@ -8,6 +8,12 @@ import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
 
+/**
+ *
+ * @explain: 方法名
+ * @Description: java类作用描述
+ *
+ */
 public class APP extends Application {
 
     public static BluetoothSocket bluetoothSocket;

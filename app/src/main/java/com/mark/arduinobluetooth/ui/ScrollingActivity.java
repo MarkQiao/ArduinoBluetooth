@@ -82,7 +82,7 @@ public class ScrollingActivity extends AppCompatActivity {
     public void init() {
         dialogs = new ProgressDialog(ScrollingActivity.this);
         collapsingToolbarLayout = findViewById(R.id.collapsing_toolbar);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         //设置收缩展开toolbar字体颜色
         setSupportActionBar(toolbar);
         collapsingToolbarLayout.setExpandedTitleColor(Color.TRANSPARENT);
@@ -91,21 +91,18 @@ public class ScrollingActivity extends AppCompatActivity {
         mProgressBar = findViewById(R.id.devicesScanProgress);
         fabOpen = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fab_open);
         fabOnClick = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rotate_backward);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                BluetoothUtils.getInstance().startScanBluth();
-                fab.startAnimation(fabOnClick);
-            }
+        fab.setOnClickListener(view -> {
+            BluetoothUtils.getInstance().startScanBluth();
+            fab.startAnimation(fabOnClick);
         });
         BluetoothUtils.getInstance().checkBluetooth(ScrollingActivity.this);
         showProgressBar();
-        this.u = ((RecyclerView) findViewById(R.id.pairedDevicesRecyclerView));
+        this.u = findViewById(R.id.pairedDevicesRecyclerView);
         LinearLayoutManager localLinearLayoutManager = new LinearLayoutManager(this);
         this.u.setLayoutManager(localLinearLayoutManager);
         this.u.setNestedScrollingEnabled(false);
 
-        this.s = ((RecyclerView) findViewById(R.id.availableDevicesRecyclerView));
+        this.s = findViewById(R.id.availableDevicesRecyclerView);
         localLinearLayoutManager = new LinearLayoutManager(this);
         this.s.setLayoutManager(localLinearLayoutManager);
         this.s.setNestedScrollingEnabled(false);
@@ -139,18 +136,10 @@ public class ScrollingActivity extends AppCompatActivity {
                  */
 
                 final TypeDialog dialog = new TypeDialog(ScrollingActivity.this);
-                dialog.setOnClickBottomListener(new TypeDialog.OnClickBottomListener() {
-                    @Override
-                    public void onNegtiveClick(final int type) {
-                        showProgressDialog("正在连接" + devices.getName() + "......");
-                        dialog.dismiss();
-                        ThreadPoolProxyFactory.getNormalThreadPoolProxy().execute(new Runnable() {
-                            @Override
-                            public void run() {
-                                BluetoothUtils.getInstance().connect(ScrollingActivity.this, type, devices, dialogs);
-                            }
-                        });
-                    }
+                dialog.setOnClickBottomListener(type -> {
+                    showProgressDialog("正在连接" + devices.getName() + "......");
+                    dialog.dismiss();
+                    ThreadPoolProxyFactory.getNormalThreadPoolProxy().execute(() -> BluetoothUtils.getInstance().connect(ScrollingActivity.this, type, devices, dialogs));
                 });
                 dialog.show();
             }
