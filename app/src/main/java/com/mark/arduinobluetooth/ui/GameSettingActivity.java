@@ -2,8 +2,6 @@ package com.mark.arduinobluetooth.ui;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
@@ -11,11 +9,11 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.mark.arduinobluetooth.BeasActivity;
 import com.mark.arduinobluetooth.GlobalConstant;
 import com.mark.arduinobluetooth.R;
 import com.mark.arduinobluetooth.db.DBUtil;
 
-import androidx.appcompat.app.AppCompatActivity;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -23,7 +21,7 @@ import butterknife.OnClick;
 /**
  * @author wangqiao
  */
-public class GameSettingActivity extends AppCompatActivity {
+public class GameSettingActivity extends BeasActivity {
 
 
     @BindView(R.id.config_leftArrow)
@@ -95,24 +93,15 @@ public class GameSettingActivity extends AppCompatActivity {
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game_setting);
-        //绑定处理
-        ButterKnife.bind(this);
-
-        androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setTitle("");
-            actionBar.setHomeButtonEnabled(true);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-
-        }
-
-        initView();
+    protected int getLayoutId() {
+        return R.layout.activity_game_setting;
     }
 
-    private void initView() {
+    @Override
+    protected void initView() {
+        //绑定处理
+        ButterKnife.bind(this);
+        setTitle("");
         config_leftArrow.setColorFilter(getResources().getColor(R.color.black));
         config_upArrow.setColorFilter(getResources().getColor(R.color.black));
         config_rightArrow.setColorFilter(getResources().getColor(R.color.black));
@@ -166,22 +155,6 @@ public class GameSettingActivity extends AppCompatActivity {
                 break;
         }
     }
-    /**
-     * 复写：设置菜单监听
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            //actionbar navigation up 按钮
-            case android.R.id.home:
-                finish();
-                break;
-            default:
-                break;
-        }
-        return true;
-    }
-
 
     private void initEsitTextHide() {
         ShowOrHideView(configLeftArrowCommand, configLeftArrowCommandEditText, true);

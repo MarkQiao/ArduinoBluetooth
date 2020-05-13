@@ -28,9 +28,9 @@ public class APP extends Application {
         Realm.init(context);
         RealmConfiguration configuration = new RealmConfiguration.Builder()
                 .name("arduino.realm")
-                .schemaVersion(2)
+                .schemaVersion(3)
                 //.migration(new CustomMigration())//升级数据库
-                //.deleteRealmIfMigrationNeeded()
+                .deleteRealmIfMigrationNeeded()
                 .build();
 
         mRealm = Realm.getInstance(configuration);

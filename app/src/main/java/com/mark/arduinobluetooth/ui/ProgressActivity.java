@@ -1,13 +1,12 @@
 package com.mark.arduinobluetooth.ui;
 
 import android.graphics.Color;
-import android.os.Bundle;
 import android.os.Handler;
-import android.view.MenuItem;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.mark.arduinobluetooth.APP;
+import com.mark.arduinobluetooth.BeasActivity;
 import com.mark.arduinobluetooth.R;
 import com.mark.arduinobluetooth.controls.AnalogController;
 import com.mark.arduinobluetooth.service.ReceiveSocketService;
@@ -15,14 +14,12 @@ import com.mark.arduinobluetooth.service.SendSocketService;
 
 import java.io.IOException;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import static com.mark.arduinobluetooth.util.factory.ThreadPoolProxyFactory.getNormalThreadPoolProxy;
 
 /**
  * @author wangqiao
  */
-public class ProgressActivity extends AppCompatActivity {
+public class ProgressActivity extends BeasActivity {
     TextView tv_show_seek;
     SeekBar mSeekBar;
     AnalogController bassController;
@@ -30,16 +27,13 @@ public class ProgressActivity extends AppCompatActivity {
     private int exitTime = 0;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_progress);
+    protected int getLayoutId() {
+        return R.layout.activity_progress;
+    }
 
-        androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setTitle(getIntent().getStringExtra("DeviceName"));
-            actionBar.setHomeButtonEnabled(true);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+    @Override
+    protected void initView() {
+        setTitle(getIntent().getStringExtra("DeviceName"));
 
         tv_show_seek = findViewById(R.id.tv_show_seek);
         mSeekBar = findViewById(R.id.seekBar2);
@@ -75,8 +69,8 @@ public class ProgressActivity extends AppCompatActivity {
         //开启消息接收端
         getNormalThreadPoolProxy().execute(() -> new ReceiveSocketService().receiveMessage(str -> new Handler(getMainLooper()).post(() -> {
             try {
-                mSeekBar.setProgress( Integer.parseInt( str));
-            }catch (Exception e){
+                mSeekBar.setProgress(Integer.parseInt(str));
+            } catch (Exception e) {
 
             }
 
@@ -85,21 +79,6 @@ public class ProgressActivity extends AppCompatActivity {
     }
 
 
-    /**
-     * 复写：设置菜单监听s
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            //actionbar navigation up 按钮
-            case android.R.id.home:
-                finish();
-                break;
-            default:
-                break;
-        }
-        return true;
-    }
 
     @Override
     protected void onDestroy() {

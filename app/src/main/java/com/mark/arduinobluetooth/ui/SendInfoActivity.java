@@ -3,7 +3,6 @@ package com.mark.arduinobluetooth.ui;
 import android.bluetooth.BluetoothDevice;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.os.Bundle;
 import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -15,6 +14,7 @@ import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.mark.arduinobluetooth.APP;
+import com.mark.arduinobluetooth.BeasActivity;
 import com.mark.arduinobluetooth.R;
 import com.mark.arduinobluetooth.service.ReceiveSocketService;
 import com.mark.arduinobluetooth.service.SendSocketService;
@@ -26,23 +26,23 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.IOException;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import static com.mark.arduinobluetooth.util.factory.ThreadPoolProxyFactory.getNormalThreadPoolProxy;
 
 /**
  * @author wangqiao
  */
-public class SendInfoActivity extends AppCompatActivity {
+public class SendInfoActivity extends BeasActivity {
 
     private TextView showtv;
     private EditText et_send;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_send_info);
+    protected int getLayoutId() {
+        return R.layout.activity_send_info;
+    }
 
+    @Override
+    protected void initView() {
         setTitle(getIntent().getStringExtra("DeviceName"));
         androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
@@ -60,7 +60,6 @@ public class SendInfoActivity extends AppCompatActivity {
                 str -> new Handler(
                         getMainLooper()).post(() -> update("服务:  ", str))));
     }
-
 
     /**
      * 复写：添加菜单布局
@@ -92,26 +91,23 @@ public class SendInfoActivity extends AppCompatActivity {
 
 
     private void init() {
-        et_send.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-                if (null != keyEvent && KeyEvent.KEYCODE_ENTER == keyEvent.getKeyCode()) {
-                    switch (keyEvent.getAction()) {
-                        case KeyEvent.ACTION_UP:
-                            //做爱做的事情
-                            if (!et_send.getText().toString().isEmpty()) {
-                                SendSocketService.sendMessage(et_send.getText().toString());
-                                update("本机:  ", et_send.getText().toString());
-                            } else {
-                                Snackbar.make(et_send, "输入不能为空", Snackbar.LENGTH_LONG).show();
-                            }
-                            return true;
-                        default:
-                            return true;
-                    }
+        et_send.setOnEditorActionListener((textView, i, keyEvent) -> {
+            if (null != keyEvent && KeyEvent.KEYCODE_ENTER == keyEvent.getKeyCode()) {
+                switch (keyEvent.getAction()) {
+                    case KeyEvent.ACTION_UP:
+                        //做爱做的事情
+                        if (!et_send.getText().toString().isEmpty()) {
+                            SendSocketService.sendMessage(et_send.getText().toString());
+                            update("本机:  ", et_send.getText().toString());
+                        } else {
+                            Snackbar.make(et_send, "输入不能为空", Snackbar.LENGTH_LONG).show();
+                        }
+                        return true;
+                    default:
+                        return true;
                 }
-                return false;
             }
+            return false;
         });
         et_send.setOnTouchListener((v, event) -> {
             // et.getCompoundDrawables()得到一个长度为4的数组，分别表示左右上下四张图片

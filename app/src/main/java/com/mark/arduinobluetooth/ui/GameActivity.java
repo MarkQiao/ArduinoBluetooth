@@ -3,7 +3,6 @@ package com.mark.arduinobluetooth.ui;
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +11,7 @@ import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.mark.arduinobluetooth.APP;
+import com.mark.arduinobluetooth.BeasActivity;
 import com.mark.arduinobluetooth.GlobalConstant;
 import com.mark.arduinobluetooth.R;
 import com.mark.arduinobluetooth.controls.ArrowButtonControl;
@@ -27,13 +27,12 @@ import org.greenrobot.eventbus.ThreadMode;
 
 import java.io.IOException;
 
-import androidx.appcompat.app.AppCompatActivity;
 import butterknife.ButterKnife;
 
 /**
  * @author wangqiao
  */
-public class GameActivity extends AppCompatActivity implements View.OnClickListener {
+public class GameActivity extends BeasActivity implements View.OnClickListener {
 
 
     ArrowButtonControl controller_arrowLeft, controller_arrowTop, controller_arrowBottom, controller_arrowRight;
@@ -41,17 +40,15 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
     Button centerButton1, centerButton2;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game);
+    protected int getLayoutId() {
+        return R.layout.activity_game;
+    }
+
+    @Override
+    protected void initView() {
         //绑定处理
         ButterKnife.bind(this);
-        androidx.appcompat.app.ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setTitle(getIntent().getStringExtra("DeviceName"));
-            actionBar.setHomeButtonEnabled(true);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
+        setTitle(getIntent().getStringExtra("DeviceName"));
         EventBus.getDefault().register(this);
         centerButton1 = findViewById(R.id.centerButton1);
         centerButton2 = findViewById(R.id.centerButton2);
@@ -132,6 +129,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
         centerButton2.setOnClickListener(this);
     }
 
+
     /**
      * 复写：添加菜单布局
      */
@@ -179,7 +177,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                 Snackbar bar = Snackbar.make(controller_arrowBottom, message.message, Snackbar.LENGTH_INDEFINITE)
                         .setAction("ok", v -> finish());
                 bar.getView().setBackgroundColor(getResources().getColor(R.color.white));
-                ((TextView)bar.getView().findViewById(R.id.snackbar_text)).setTextColor(Color.BLACK);
+                ((TextView) bar.getView().findViewById(R.id.snackbar_text)).setTextColor(Color.BLACK);
                 bar.show();
                 break;
 
@@ -188,7 +186,7 @@ public class GameActivity extends AppCompatActivity implements View.OnClickListe
                         .setAction("ok", v ->
                                 this.startActivity(new Intent(this, GameSettingActivity.class)));
                 bars.getView().setBackgroundColor(getResources().getColor(R.color.white));
-                ((TextView)bars.getView().findViewById(R.id.snackbar_text)).setTextColor(Color.BLACK);
+                ((TextView) bars.getView().findViewById(R.id.snackbar_text)).setTextColor(Color.BLACK);
                 bars.show();
                 break;
             default:

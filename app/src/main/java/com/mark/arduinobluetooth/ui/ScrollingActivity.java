@@ -10,7 +10,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Build;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -20,8 +19,15 @@ import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.mark.arduinobluetooth.BeasActivity;
 import com.mark.arduinobluetooth.R;
 import com.mark.arduinobluetooth.adapter.LoanDaquanAdapter;
 import com.mark.arduinobluetooth.dialog.CommonDialog;
@@ -33,17 +39,10 @@ import com.mark.arduinobluetooth.util.factory.ThreadPoolProxyFactory;
 import java.util.ArrayList;
 import java.util.List;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 /**
  * @author wangqiao
  */
-public class ScrollingActivity extends AppCompatActivity {
+public class ScrollingActivity extends BeasActivity {
     private CollapsingToolbarLayout collapsingToolbarLayout;
     private Animation fabOpen;
     private Animation fabOnClick;
@@ -58,9 +57,12 @@ public class ScrollingActivity extends AppCompatActivity {
     ProgressDialog dialogs;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scrolling);
+    protected int getLayoutId() {
+        return R.layout.activity_scrolling;
+    }
+
+    @Override
+    protected void initView() {
         if (Build.VERSION.SDK_INT >= 6.0) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     MY_PERMISSION_REQUEST_CONSTANT);
@@ -139,7 +141,8 @@ public class ScrollingActivity extends AppCompatActivity {
                 dialog.setOnClickBottomListener(type -> {
                     showProgressDialog("正在连接" + devices.getName() + "......");
                     dialog.dismiss();
-                    ThreadPoolProxyFactory.getNormalThreadPoolProxy().execute(() -> BluetoothUtils.getInstance().connect(ScrollingActivity.this, type, devices, dialogs));
+                    ThreadPoolProxyFactory.getNormalThreadPoolProxy().execute(() ->
+                            BluetoothUtils.getInstance().connect(ScrollingActivity.this, type, devices, dialogs));
                 });
                 dialog.show();
             }

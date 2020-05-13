@@ -3,6 +3,9 @@ package com.mark.arduinobluetooth.util;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.util.DisplayMetrics;
+
+import com.mark.arduinobluetooth.APP;
 
 /**
  * @author MarkQiao
@@ -78,5 +81,10 @@ public class Utils {
         return null;
     }
 
+    public static int dp2px(int dp) {
+        DisplayMetrics displayMetrics = APP.context.getResources().getDisplayMetrics();
+        float density = displayMetrics.scaledDensity;
+        return (int) (dp * density + 0.5f);
+    }
 
 }
