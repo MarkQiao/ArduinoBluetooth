@@ -4,16 +4,15 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.mark.arduinobluetooth.R;
-
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+
+import com.mark.arduinobluetooth.R;
 
 /**
  * @ClassName: TypeDialog
@@ -71,30 +70,10 @@ public class TypeDialog extends Dialog {
     }
 
     private void initEvent() {
-        controller.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickBottomListener.onNegtiveClick(0);
-            }
-        });
-        switchOnOff.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickBottomListener.onNegtiveClick(1);
-            }
-        });
-        dimmer.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickBottomListener.onNegtiveClick(2);
-            }
-        });
-        terminal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onClickBottomListener.onNegtiveClick(3);
-            }
-        });
+        controller.setOnClickListener(v -> onClickBottomListener.onNegtiveClick(0));
+        switchOnOff.setOnClickListener(v -> onClickBottomListener.onNegtiveClick(1));
+        dimmer.setOnClickListener(v -> onClickBottomListener.onNegtiveClick(2));
+        terminal.setOnClickListener(v -> onClickBottomListener.onNegtiveClick(3));
     }
 
     /**
